@@ -25,16 +25,17 @@ public class PlayerMechanics : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
             movement.enabled = false;
             movement.rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            movement.GetComponent<Collider2D>().isTrigger = true;
         }
         else if( (Input.GetKeyDown(KeyCode.E) && ishidden == true && nearShelf == true))
             {
-                ishidden = false;
-                gameObject.GetComponent<SpriteRenderer>().enabled = true;
-                movement.enabled = true;
-            movement.transform.position = movement.transform.position;
-            movement.rb.constraints = RigidbodyConstraints2D.None;
-            movement.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-
+             ishidden = false;
+             gameObject.GetComponent<SpriteRenderer>().enabled = true;
+             movement.enabled = true;
+             movement.transform.position = movement.transform.position;
+             movement.rb.constraints = RigidbodyConstraints2D.None;
+             movement.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+            movement.GetComponent<Collider2D>().isTrigger = false;
         }
     }
 
