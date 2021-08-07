@@ -21,14 +21,15 @@ public class BedroomPuzzle : MonoBehaviour
     public bool nearFleshWall;
     public bool nearString;
 
-    GameObject bucket, water, poision;
+    GameObject bucket, poision;
     GameObject[] fleshWalls;
     GameObject door;
 
     Movement movement;
 
     public TextMeshProUGUI text;
-
+    public TextMeshProUGUI textInfo;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +37,6 @@ public class BedroomPuzzle : MonoBehaviour
         movement = GetComponent<Movement>();
         doorIsclosed = true;
         bucket = GameObject.FindGameObjectWithTag("Bucket");
-        water = GameObject.FindGameObjectWithTag("Water");
         door = GameObject.FindGameObjectWithTag("Door");
         poision = GameObject.FindGameObjectWithTag("Poision");
         fleshWalls = GameObject.FindGameObjectsWithTag("FleshWall");
@@ -49,27 +49,54 @@ public class BedroomPuzzle : MonoBehaviour
         if(doorIsclosed == true)
         {
             door.GetComponent<DoorScript1>().enabled = false;
+            GameManager.wasInBedroom = true;
         }
         else if(doorIsclosed == false)
         {
             door.GetComponent<DoorScript1>().enabled = true;
+            GameManager.wasInBedroom = false;
 
         }
+
+
+
         if (nearBucket == true && Input.GetKeyDown(KeyCode.E))
         {
             hasBucket = true;
+            text.text = "";
+
             Destroy(bucket);
         }
         
         if(nearWater == true && Input.GetKeyDown(KeyCode.E) && hasBucket == true)
         {
             hasWaterInBucket = true;
+            text.text = "";
+
         }
-        if(nearPoision == true && Input.GetKeyDown(KeyCode.E) && hasBucket == true && hasWaterInBucket)
+        else if(nearWater == true && Input.GetKeyDown(KeyCode.E) && hasBucket == false)
+        {
+            textInfo.text = "I NEED A BUCKET";
+        }
+
+
+        if (nearPoision == true && Input.GetKeyDown(KeyCode.E) && hasBucket == true && hasWaterInBucket)
         {
             hasPoisionInBucket = true;
+            text.text = "";
+
             Destroy(poision);
         }
+        else if(nearPoision == true && Input.GetKeyDown(KeyCode.E) && hasBucket == true && hasWaterInBucket == false)
+        {
+            textInfo.text = "I NEED TO BLEND THIS POISION WITH WATER";
+        }
+        else if(nearPoision == true && Input.GetKeyDown(KeyCode.E) && hasBucket == false)
+        {
+            textInfo.text = "I NEED A BUCKET";
+        }
+
+
         if (nearFleshWall == true && Input.GetKeyDown(KeyCode.E) && hasBucket == true && hasWaterInBucket && hasPoisionInBucket)
         {
             for (int i = 0; i < fleshWalls.Length; i++)
@@ -78,6 +105,10 @@ public class BedroomPuzzle : MonoBehaviour
                 doorIsclosed = false;
             }
             
+        }
+        else if(nearFleshWall == true && Input.GetKeyDown(KeyCode.E))
+        {
+            textInfo.text = "I NEED SOMETHING TO KILL IT WITH";
         }
        
         
@@ -116,23 +147,26 @@ public class BedroomPuzzle : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Bucket":
-
+                text.text = "PRESS E TO INTERACT";
                 nearBucket = true;
 
                 break;
 
             case "Water":
                 nearWater = true;
+                text.text = "PRESS E TO INTERACT";
 
                 break;
 
             case "Poision":
+                text.text = "PRESS E TO INTERACT";
 
                 nearPoision = true;
 
                 break;
 
             case "FleshWall":
+                text.text = "PRESS E TO INTERACT";
 
                 nearFleshWall = true;
 
@@ -155,11 +189,14 @@ public class BedroomPuzzle : MonoBehaviour
         switch (collision.gameObject.tag)
         {
             case "Bucket":
-
+                text.text = "";
+                textInfo.text = "";
                 nearBucket = false;
 
                 break;
             case "Water":
+                text.text = "";
+                textInfo.text = "";
 
                 nearWater = false;
 
@@ -167,10 +204,14 @@ public class BedroomPuzzle : MonoBehaviour
             case "Poision":
 
                 nearPoision = false;
+                text.text = "";
+                textInfo.text = "";
 
                 break;
            
             case "FleshWall":
+                text.text = "";
+                textInfo.text = "";
 
                 nearFleshWall = false;
 
@@ -178,6 +219,7 @@ public class BedroomPuzzle : MonoBehaviour
 
             case "String":
                 text.text = "";
+                textInfo.text = "";
 
                 nearString = false;
                 break;

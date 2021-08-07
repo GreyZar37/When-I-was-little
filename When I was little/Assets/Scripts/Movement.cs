@@ -12,20 +12,37 @@ public class Movement : MonoBehaviour
     public float jumpForce = 5f;
     public float checkGroundRadius;
 
+    bool facingRight;
     bool isGrounded = false;
-    
-   
+
+    Animator animator;
+
     public LayerMask groundLayer, objectLayer;
 
+    bool isMoving;
 
     void Start()
     {
+        if(GameManager.wasInBedroom == true)
+        {
+            gameObject.transform.position = new Vector3(25, -4, 0);
+        }
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        
+        if(horizontal != 0)
+        {
+            isMoving = true;
+        }
+        else
+        {
+            isMoving = false;
+
+        }
+        flip();
         jump();
         groundCheck();
         objectCheck();
@@ -72,6 +89,32 @@ public class Movement : MonoBehaviour
     void movement()
     {
         horizontal = Input.GetAxis("Horizontal");
+        animator.SetBool("Moving", isMoving);
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+    }
+    void flip()
+    {
+
+        if(horizontal < -0.1)
+        {
+            facingRight = true;
+        }
+        else if( horizontal > 0.1)
+        {
+            facingRight = false;
+        }
+
+
+
+
+
+        if (facingRight == true)
+        {
+            transform.localScale = new Vector3(-2, 2, 2);
+        }
+        else if (facingRight == false)
+        {
+            transform.localScale = new Vector3(2, 2, 2);
+        }
     }
 }
