@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerMechanics : MonoBehaviour
 {
     public bool ishidden = false;
     public bool nearShelf = false;
+
+    public TextMeshProUGUI text;
 
     Movement movement;
 
@@ -21,15 +24,19 @@ public class PlayerMechanics : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.E) && ishidden == false && nearShelf == true)
         {
+            text.text = "PRESS E TO EXIT";
             ishidden = true;
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
             movement.enabled = false;
             movement.rb.constraints = RigidbodyConstraints2D.FreezeAll;
             movement.GetComponent<Collider2D>().isTrigger = true;
+
         }
         else if( (Input.GetKeyDown(KeyCode.E) && ishidden == true && nearShelf == true))
             {
-             ishidden = false;
+            text.text = "PRESS E TO HIDE";
+
+            ishidden = false;
              gameObject.GetComponent<SpriteRenderer>().enabled = true;
              movement.enabled = true;
              movement.transform.position = movement.transform.position;
@@ -44,18 +51,17 @@ public class PlayerMechanics : MonoBehaviour
         
         if (collision.gameObject.tag == "Shelf")
         {
-            print("Enter");
             nearShelf = true;
-
+            text.text = "PRESS E TO HIDE";
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Shelf")
         {
-            print("Exit");
 
             nearShelf = false;
+            text.text = "";
 
         }
     }
