@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Shelf
   - Wall
+  - Key
+  - Water
+  - Poision
+  - Bucket
+  - FleshWall
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -15,9 +21,9 @@ TagManager:
   - UI
   - Ground
   - Shelf
-  - 
-  - 
-  - 
+  - Objects
+  - Enemy
+  - Tanticle
   - 
   - 
   - 

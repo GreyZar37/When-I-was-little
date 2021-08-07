@@ -15,7 +15,7 @@ public class Movement : MonoBehaviour
     bool isGrounded = false;
     
    
-    public LayerMask groundLayer;
+    public LayerMask groundLayer, objectLayer;
 
 
     void Start()
@@ -27,7 +27,8 @@ public class Movement : MonoBehaviour
     {
         
         jump();
-        groundCheck(); 
+        groundCheck();
+        objectCheck();
     }
 
     private void FixedUpdate()
@@ -46,6 +47,8 @@ public class Movement : MonoBehaviour
     void groundCheck()
     {
         Collider2D collider = Physics2D.OverlapCircle(isGroundedChecker.position, checkGroundRadius, groundLayer);
+      
+        
         if (collider != null)
         {
             isGrounded = true;
@@ -54,6 +57,17 @@ public class Movement : MonoBehaviour
         {
             isGrounded = false;
         }
+    }
+    void objectCheck()
+    {
+        Collider2D collider = Physics2D.OverlapCircle(isGroundedChecker.position, checkGroundRadius, objectLayer);
+
+
+        if (collider != null)
+        {
+            isGrounded = true;
+        }
+      
     }
     void movement()
     {
