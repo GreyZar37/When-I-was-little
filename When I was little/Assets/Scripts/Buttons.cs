@@ -14,8 +14,18 @@ public class Buttons : MonoBehaviour
 
     public Text volumetextobject;
 
+    public float OptionsTabOpenTime;
+    public float OptionsTabCloseTime;
+
     //MainMenu
-    public GameObject MainMenuButtons;
+
+    //All Buttons in Main Menu
+    public GameObject PlayBtn;
+    public GameObject OptionsBtn;
+    public GameObject QuitBtn;
+
+    public bool StartOptionsMenuOpenCooldown = false;
+    public bool StartOptionsMenuCloseCooldown = false;
 
     public void Play()
     {
@@ -24,8 +34,10 @@ public class Buttons : MonoBehaviour
 
     public void Options()
     {
-        //MainMenuButtons.SetActive(false);
-        OptionsTab.SetActive(true);
+        PlayBtn.SetActive(false);
+        OptionsBtn.SetActive(false);
+        QuitBtn.SetActive(false);
+        StartOptionsMenuOpenCooldown = true;
     }
 
     public void Quit()
@@ -42,6 +54,27 @@ public class Buttons : MonoBehaviour
 
     void Update()
     {
+        if (StartOptionsMenuOpenCooldown == true)
+        {
+            OptionsTabOpenTime -= Time.deltaTime;
+        }
+
+        if (OptionsTabOpenTime <= 0)
+        {
+            OptionsTab.SetActive(true);
+            StartOptionsMenuOpenCooldown = false;
+        }
+
+        if (StartOptionsMenuCloseCooldown == true)
+        {
+            OptionsTabCloseTime -= Time.deltaTime;
+        }
+        if (OptionsTabCloseTime <= 0f)
+        {
+            PlayBtn.SetActive(true);
+            OptionsBtn.SetActive(true);
+            QuitBtn.SetActive(true);
+        }
         volumetext = (Volume.value * 200).ToString("F0");
         volumetextobject.text = "Volume: " + volumetext + "%";
     }
@@ -49,7 +82,9 @@ public class Buttons : MonoBehaviour
     public void BackBtn()
     {
         OptionsTab.SetActive(false);
-        MainMenuButtons.SetActive(true);
+        PlayBtn.SetActive(true);
+        OptionsBtn.SetActive(true);
+        QuitBtn.SetActive(true);
     }
 
     //DeathScreen
