@@ -42,7 +42,6 @@ public class DoorScript1 : MonoBehaviour
                     SceneManager.LoadScene("Hallway");
                     GameManager.wasInBedroom = true;
                     text.text = "";
-
                     break;
 
                 default:
