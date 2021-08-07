@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum state
 {
@@ -128,7 +129,7 @@ public class AiController : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            Destroy(collision.gameObject);
+            SceneManager.LoadScene("DeathScreen");
         }
     }
 }
