@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BedroomPuzzle : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class BedroomPuzzle : MonoBehaviour
    public bool hasBucket;
    public bool hasWaterInBucket;
    public bool hasPoisionInBucket;
+    public bool onString;
+
+    float vertical;
 
     bool doorIsclosed = true;
 
@@ -15,14 +19,21 @@ public class BedroomPuzzle : MonoBehaviour
     public bool nearWater;
     public bool nearPoision;
     public bool nearFleshWall;
+    public bool nearString;
 
     GameObject bucket, water, poision;
     GameObject[] fleshWalls;
     GameObject door;
 
+    Movement movement;
+
+    public TextMeshProUGUI text;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        movement = GetComponent<Movement>();
         doorIsclosed = true;
         bucket = GameObject.FindGameObjectWithTag("Bucket");
         water = GameObject.FindGameObjectWithTag("Water");
@@ -53,7 +64,6 @@ public class BedroomPuzzle : MonoBehaviour
         if(nearWater == true && Input.GetKeyDown(KeyCode.E) && hasBucket == true)
         {
             hasWaterInBucket = true;
-            Destroy(water);
         }
         if(nearPoision == true && Input.GetKeyDown(KeyCode.E) && hasBucket == true && hasWaterInBucket)
         {
@@ -68,6 +78,34 @@ public class BedroomPuzzle : MonoBehaviour
                 doorIsclosed = false;
             }
             
+        }
+       
+        
+        
+        
+        
+        if(nearString == true && Input.GetKeyDown(KeyCode.E))
+        {
+            gameObject.GetComponent<Rigidbody2D>().gravityScale = 0;
+            gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+            gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+            gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+            onString = true;
+        }
+        else if( nearString == false)
+        {
+            gameObject.GetComponent<Rigidbody2D>().gravityScale = 2;
+            onString = false;
+          
+
+        }
+
+        if (onString == true)
+        {
+            text.text = "";
+
+            vertical = Input.GetAxis("Vertical");
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(gameObject.GetComponent<Rigidbody2D>().velocity.x, vertical * 3);
         }
     }
 
@@ -100,6 +138,13 @@ public class BedroomPuzzle : MonoBehaviour
 
                 break;
 
+            case "String":
+                text.text = "PRESS E TO CLIMP";
+
+                nearString = true;
+
+                break;
+
             default:
                 break;
         }
@@ -129,6 +174,12 @@ public class BedroomPuzzle : MonoBehaviour
 
                 nearFleshWall = false;
 
+                break;
+
+            case "String":
+                text.text = "";
+
+                nearString = false;
                 break;
             default:
                 break;
