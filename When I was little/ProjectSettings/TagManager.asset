@@ -12,6 +12,7 @@ TagManager:
   - Bucket
   - FleshWall
   - Door
+  - String
   layers:
   - Default
   - TransparentFX
