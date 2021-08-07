@@ -523,6 +523,7 @@ GameObject:
   - component: {fileID: 1642331551}
   - component: {fileID: 1642331553}
   - component: {fileID: 1642331552}
+  - component: {fileID: 1642331554}
   m_Layer: 5
   m_Name: YouDied
   m_TagString: Untagged
@@ -587,6 +588,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642331550}
   m_CullTransparentMesh: 1
+--- !u!95 &1642331554
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1642331550}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6b7d383b5413c62458b23a6c1a1dffd0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1831453834
 GameObject:
   m_ObjectHideFlags: 0
