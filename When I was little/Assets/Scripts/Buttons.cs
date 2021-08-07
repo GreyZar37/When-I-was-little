@@ -30,6 +30,8 @@ public class Buttons : MonoBehaviour
     public void Play()
     {
         SceneManager.LoadScene("Hallway");
+        KeysCollect.keysCollected = 0;
+        GameManager.wasInBedroom = false;
     }
 
     public void Options()
@@ -92,6 +94,8 @@ public class Buttons : MonoBehaviour
     public void RestartBtn()
     {
         SceneManager.LoadScene("Hallway");
+        KeysCollect.keysCollected = 0;
+        GameManager.wasInBedroom = false;
     }
 
     public void MainMenuBtn()

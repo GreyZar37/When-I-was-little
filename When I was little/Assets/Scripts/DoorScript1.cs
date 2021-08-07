@@ -55,18 +55,21 @@ public class DoorScript1 : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
-          
-           
+        {
             if (GameManager.wasInBedroom == false)
             {
                 text.text = "PRESS E TO ENTER";
             }
-           else if (GameManager.wasInBedroom == true)
-           {
-             text.text = "LOCKED";
-           }
-  
-        nearADoor = true;
+            if (GameManager.wasInBedroom == true)
+            {
+                text.text = "LOCKED";
+            }
+
+            nearADoor = true;
+        }
+          
+           
+            
     
     }
     private void OnTriggerExit2D(Collider2D collision)

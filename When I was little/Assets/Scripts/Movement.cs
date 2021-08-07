@@ -25,7 +25,11 @@ public class Movement : MonoBehaviour
     {
         if(GameManager.wasInBedroom == true)
         {
-            gameObject.transform.position = new Vector3(25, -4, 0);
+            if(KeysCollect.keysCollected == 1)
+            {
+                gameObject.transform.position = new Vector3(25, -4, 0);
+
+            }
         }
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();

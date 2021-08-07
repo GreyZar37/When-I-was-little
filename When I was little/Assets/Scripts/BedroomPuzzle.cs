@@ -34,6 +34,7 @@ public class BedroomPuzzle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameManager.wasInBedroom = true;
         movement = GetComponent<Movement>();
         doorIsclosed = true;
         bucket = GameObject.FindGameObjectWithTag("Bucket");
@@ -46,18 +47,21 @@ public class BedroomPuzzle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(doorIsclosed == true)
+
+        if (doorIsclosed == true)
         {
-            door.GetComponent<DoorScript1>().enabled = false;
+
             GameManager.wasInBedroom = true;
+            door.GetComponent<DoorScript1>().enabled = false;
+
         }
-        else if(doorIsclosed == false)
+        else if (doorIsclosed == false)
         {
-            door.GetComponent<DoorScript1>().enabled = true;
             GameManager.wasInBedroom = false;
+            door.GetComponent<DoorScript1>().enabled = true;
+
 
         }
-
 
 
         if (nearBucket == true && Input.GetKeyDown(KeyCode.E))
