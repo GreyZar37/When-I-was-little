@@ -23,6 +23,8 @@ public class DoorScript1 : MonoBehaviour
             {
                 case "BedroomDoor":
                     SceneManager.LoadScene("Bedroom");
+                    GameManager.wasInBedroom = true;
+
                     break;
                 case "GraveyardDoor":
                     SceneManager.LoadScene("Graveyard");

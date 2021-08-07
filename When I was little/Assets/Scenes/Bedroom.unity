@@ -1154,9 +1154,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4a83fc83d3ce441b0001353aebf844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasBucket: 1
-  hasWaterInBucket: 1
-  hasPoisionInBucket: 1
+  hasBucket: 0
+  hasWaterInBucket: 0
+  hasPoisionInBucket: 0
   nearBucket: 0
   nearWater: 0
   nearPoision: 0
@@ -1687,7 +1687,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.1983557, y: 1}
+    m_SensorSize: {x: 0.65056527, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
