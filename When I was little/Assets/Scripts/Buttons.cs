@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class Buttons : MonoBehaviour
 {
     //Options
     public GameObject OptionsTab;
@@ -19,7 +19,7 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene("LevelOne");
+        SceneManager.LoadScene("Hallway");
     }
 
     public void Options()
@@ -50,5 +50,17 @@ public class MainMenu : MonoBehaviour
     {
         OptionsTab.SetActive(false);
         MainMenuButtons.SetActive(true);
+    }
+
+    //DeathScreen
+
+    public void RestartBtn()
+    {
+        SceneManager.LoadScene("Hallway");
+    }
+
+    public void MainMenuBtn()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
