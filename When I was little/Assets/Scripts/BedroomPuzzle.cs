@@ -29,11 +29,16 @@ public class BedroomPuzzle : MonoBehaviour
 
     public TextMeshProUGUI text;
     public TextMeshProUGUI textInfo;
-    
+
+    public AudioClip pickup;
+    public AudioClip water;
+    public AudioClip waterSplash;
+    AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         GameManager.wasInBedroom = true;
         movement = GetComponent<Movement>();
         doorIsclosed = true;
@@ -67,6 +72,8 @@ public class BedroomPuzzle : MonoBehaviour
         if (nearBucket == true && Input.GetKeyDown(KeyCode.E))
         {
             hasBucket = true;
+            audioSource.PlayOneShot(pickup);
+
             text.text = "";
 
             Destroy(bucket);
@@ -75,6 +82,7 @@ public class BedroomPuzzle : MonoBehaviour
         if(nearWater == true && Input.GetKeyDown(KeyCode.E) && hasBucket == true)
         {
             hasWaterInBucket = true;
+            audioSource.PlayOneShot(pickup);
             text.text = "";
 
         }
@@ -87,6 +95,8 @@ public class BedroomPuzzle : MonoBehaviour
         if (nearPoision == true && Input.GetKeyDown(KeyCode.E) && hasBucket == true && hasWaterInBucket)
         {
             hasPoisionInBucket = true;
+            audioSource.PlayOneShot(pickup);
+
             text.text = "";
 
             Destroy(poision);
@@ -103,6 +113,8 @@ public class BedroomPuzzle : MonoBehaviour
 
         if (nearFleshWall == true && Input.GetKeyDown(KeyCode.E) && hasBucket == true && hasWaterInBucket && hasPoisionInBucket)
         {
+            audioSource.PlayOneShot(waterSplash);
+
             for (int i = 0; i < fleshWalls.Length; i++)
             {
                 Destroy(fleshWalls[i]);
