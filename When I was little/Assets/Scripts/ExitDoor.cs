@@ -18,10 +18,10 @@ public class ExitDoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        print(nearADoor);
         if (nearADoor == true && Input.GetKeyDown(KeyCode.E) && KeysCollect.keysCollected == 1)
         {
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("Credits");
             text.text = "";
 
         }
@@ -36,18 +36,24 @@ public class ExitDoor : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
+        {
+            text.text = "PRESS E TO EXIT";
+
+            nearADoor = true;
+        }
 
            
-        text.text = "PRESS E TO EXIT";
-            
-        nearADoor = true;
+        
 
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
+        {
             text.text = "";
-        nearADoor = false;
+            nearADoor = false;
+        }
+          
     }
 
 }

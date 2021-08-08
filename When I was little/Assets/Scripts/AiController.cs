@@ -10,8 +10,16 @@ public enum state
 
 public class AiController : MonoBehaviour
 {
-   
+
+    bool alreadyIdleOn;
+    bool alreadyFollowOn;
+
+
     Rigidbody2D rb2D;
+
+    AudioSource audioSource;
+    public AudioClip runClip;
+    public AudioClip walkClip;
 
     float walkSpeed = 2f;
     float chaseSpeed = 6f;
@@ -34,6 +42,7 @@ public class AiController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         playerTranform = GameObject.FindGameObjectWithTag("Player").transform;
         mechanics = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMechanics>();
         rb2D = GetComponent<Rigidbody2D>();
@@ -53,10 +62,25 @@ public class AiController : MonoBehaviour
 
         if(States == state.idle)
         {
+            if(alreadyIdleOn == false)
+            {
+                audioSource.Stop();
+                audioSource.PlayOneShot(walkClip);
+                alreadyIdleOn = true;
+            }
+            
             idle();
         }
         if(States == state.follow)
         {
+            if (alreadyIdleOn == true)
+            {
+                audioSource.Stop();
+                audioSource.PlayOneShot(runClip);
+                alreadyIdleOn = false;
+            }
+          
+
             follow();
         }
     }
