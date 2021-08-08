@@ -45,5 +45,7 @@ public class IngameOptions : MonoBehaviour
     public void RestartBtn()
     {
         SceneManager.LoadScene("Hallway");
+        GameManager.wasInBedroom = false;
+        KeysCollect.keysCollected = 0;
     }
 }
