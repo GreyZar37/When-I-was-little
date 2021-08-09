@@ -82,7 +82,7 @@ public class BedroomPuzzle : MonoBehaviour
         if(nearWater == true && Input.GetKeyDown(KeyCode.E) && hasBucket == true)
         {
             hasWaterInBucket = true;
-            audioSource.PlayOneShot(pickup);
+            audioSource.PlayOneShot(water);
             text.text = "";
 
         }

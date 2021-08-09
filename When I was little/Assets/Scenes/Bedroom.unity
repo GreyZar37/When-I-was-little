@@ -1248,7 +1248,7 @@ MonoBehaviour:
   nearString: 0
   text: {fileID: 1053604850}
   textInfo: {fileID: 1533187304}
-  pickup: {fileID: 8300000, guid: fbe8829b054bcba40a574e4a2510f86f, type: 3}
+  pickup: {fileID: 8300000, guid: c55eefdcfbdd4e548b87a8da3960da90, type: 3}
   water: {fileID: 8300000, guid: fbe8829b054bcba40a574e4a2510f86f, type: 3}
   waterSplash: {fileID: 8300000, guid: cdc606464f6c4f14e956bb1860e125c5, type: 3}
 --- !u!95 &194103457
